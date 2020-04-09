@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: create-preview
+name: create-preview-env
 
 # test commit 2
 steps:
@@ -11,3 +11,56 @@ steps:
 trigger:
   event:
   - pull_request
+  action:
+  - opened
+
+---
+kind: pipeline
+type: docker
+name: update-preview-env
+
+# test commit 2
+steps:
+- name: test
+  image: alpine
+  commands:
+  - echo "Update preview environment"
+trigger:
+  event:
+  - pull_request
+  action:
+  - synchronized
+
+---
+kind: pipeline
+type: docker
+name: deploy-engineering
+
+# test commit 2
+steps:
+- name: test
+  image: alpine
+  commands:
+  - echo "Deploy to engeering"
+trigger:
+  event:
+  - push
+  branch:
+  - master
+
+---
+kind: pipeline
+type: docker
+name: deploy-staging
+
+# test commit 2
+steps:
+- name: test
+  image: alpine
+  commands:
+  - echo "Deploy to staging"
+trigger:
+  event:
+  - push
+  branch:
+  - release-*
