@@ -8,7 +8,7 @@ steps:
   image: alpine
   commands:
   - echo "Create preview environment"
-tirgger:
+trigger:
   ref:
   - refs/pull/**
   event:
