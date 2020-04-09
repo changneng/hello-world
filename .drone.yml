@@ -2,7 +2,7 @@ kind: pipeline
 type: docker
 name: create-preview
 
-# test commit 1
+# test commit 2
 steps:
 - name: test
   image: alpine
