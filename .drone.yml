@@ -9,7 +9,5 @@ steps:
   commands:
   - echo "Create preview environment"
 trigger:
-  ref:
-  - refs/pull/**
   event:
-  - create
+  - pull_request
