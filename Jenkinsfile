@@ -8,7 +8,9 @@ pipeline {
   stages {
     stage('BUILD STAGING') {
       when {
-        branch pattern: "release-*"
+        expression {
+          BRANCH_NAME ==~ /release-.*/
+        }
       }
       steps {
         sh 'echo "Deploy to Staging"'
