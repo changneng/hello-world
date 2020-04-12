@@ -6,23 +6,23 @@ pipeline {
 
   }
   stages {
-    stage('BUILD STAGING') {
-      when {
-        expression {
-          BRANCH_NAME ==~ /release-.*/
+    stage('TEST') {
+      steps {
+        echo pullRequest.labels
+        script {
+          if (env.BRANCH_NAME == 'master') {
+              env.TARGET = "STAGING"
+          } else {
+              env.TARGET = "PRODUCTION"
+          }
         }
       }
-      steps {
-        sh 'echo "Deploy to Staging"'
-      }
     }
-    stage('BUILD ENG') {
-      when {
-        branch pattern: "master"
-      }
+    stage('FINAL') {
       steps {
-        sh 'echo "Deploy to Eng"'
+        sh 'echo "ENV: $TARGET"'
       }
     }
   }
 }
+
